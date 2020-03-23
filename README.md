@@ -1,6 +1,3 @@
-Baresip - Win32
------------------
-
 Environment
 -----------
   - Tested with  
