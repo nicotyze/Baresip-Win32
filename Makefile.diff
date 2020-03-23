@@ -1,0 +1,43 @@
+diff --git a/Makefile b/Makefile
+index fec7449..c10d69d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -36,7 +36,7 @@ WINE      := wine
+ #
+ 
+ CFLAGS    := \
+-	-DFD_SETSIZE=2048 \
++	-DFD_SETSIZE=4096 \
+ 	-g -gstabs \
+ 	-isystem $(PWD)/openssl/include
+ 
+@@ -47,7 +47,7 @@ LFLAGS    := \
+ 	-L$(PWD)/rem
+ 
+ # workaround for linker order (note, the order is important)
+-LIBS	:= -lrem -lssl -lcrypto -lwsock32 -lws2_32 -liphlpapi -lwinmm \
++LIBS	+= -lrem -lssl -lcrypto -lwsock32 -lws2_32 -liphlpapi -lwinmm \
+ 	-lgdi32 -lcrypt32 \
+ 	-lstrmiids -lole32 -loleaut32 -static -lstdc++
+ 
+@@ -55,8 +55,8 @@ LIBS	:= -lrem -lssl -lcrypto -lwsock32 -lws2_32 -liphlpapi -lwinmm \
+ COMMON_FLAGS := CC=$(CC) \
+ 		CXX=$(CXX) \
+ 		RANLIB=$(RANLIB) \
+-		EXTRA_CFLAGS="$(CFLAGS)" \
+-		EXTRA_LFLAGS="$(LFLAGS)" \
++		EXTRA_CFLAGS+="$(CFLAGS)" \
++		EXTRA_LFLAGS+="$(LFLAGS)" \
+ 		LIBS="$(LIBS)" \
+ 		SYSROOT=$(SYSROOT) \
+ 		SYSROOT_ALT= \
+@@ -138,7 +138,8 @@ baresip:	Makefile librem.a libre.a
+ 	make selftest.exe baresip.exe -C baresip $(COMMON_FLAGS) STATIC=1 \
+ 		LIBRE_SO=$(PWD)/re LIBREM_PATH=$(PWD)/rem \
+ 		EXTRA_MODULES="$(EXTRA_MODULES)"
+-	cd baresip && $(WINE) selftest.exe && cd ..
++	cp baresip/*.exe $(PREFIX) 
++	cd $(PREFIX) && $(WINE) selftest.exe && cd ..
+ 
+ .PHONY: openssl
+ openssl:
