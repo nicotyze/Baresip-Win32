@@ -73,6 +73,7 @@ Build
 		export EXTRA_CFLAGS="-I$SSL_PATH/include -I$FFMPEG_PATH/include -I$SPANDSP_PATH/src -I$SDL2_PATH/i686-w64-mingw32/include -I/$TIFF_PATH/include -I/$SNDFILE_PATH/include"
 		export EXTRA_LIBS="-lgdi32 -lcrypt32 -lstrmiids  -loleaut32 -lole32 -lstdc++ $SDL2_PATH/i686-w64-mingw32/lib/libSDL2.dll.a $SPANDSP_PATH/spandsp.lib $SNDFILE_PATH/lib/libsndfile-1.lib -lpthread -lavcodec.dll -lavutil.dll -lavformat.dll -lavdevice.dll"
 		export EXTRA_LFLAGS="-L$FFMPEG_PATH/lib -L$SPANDSP_PATH -L/usr/i686-w64-mingw32/lib"
+
 		LIBS=$EXTRA_LIBS  make TUPLE=i686-w64-mingw32 baresip PREFIX=`pwd`/win_install  baresip USE_AVCODEC=1 USE_SDL=1 USE_AVFORMAT=1 USE_DSHOW=1 USE_G722=1 USE_SNDFILE=1 HAVE_PTHREAD=1 install
 
 
